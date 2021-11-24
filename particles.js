@@ -14,8 +14,10 @@ function draw() {
         bubble.show()
         bubble.move()
         bubble.fade()
+
     });
     bubbles = bubbles.filter((bubble) => bubble.brightness > 0);
+
 }
 
 class Bubble {
@@ -40,4 +42,6 @@ class Bubble {
     fade() {
         this.brightness -= 1;
     }
+
+
 }
