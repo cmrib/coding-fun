@@ -1,5 +1,7 @@
 let x = 0;
-let xspeed = 8
+let xspeed = 3;
+let y = 0;
+let yspeed = 15;
 
 function setup() {
     createCanvas(600, 300)
@@ -12,10 +14,15 @@ function draw() {
     background(col1, 0, col2);
 
     fill(255);
-    circle(x, height / 2, 30);
+    circle(x, y, 30);
     x += xspeed;
+    y += yspeed;
 
     if (x >= width || x <= 0) {
         xspeed = xspeed * (-1);
+    }
+
+    if (y >= height || y <= 0) {
+        yspeed = yspeed * (-1);
     }
 }

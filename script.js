@@ -1,29 +1,18 @@
-let x = 0;
-let xspeed = 8
-let y = 0;
-let yspeed = 3;
+var inc = 0
 
 
 function setup() {
-    createCanvas(600, 300)
+    createCanvas(400, 400);
 }
 
 function draw() {
+    background(51);
+    stroke(255);
 
-    let col1 = map(x, 0, width, 0, 200);
-    let col2 = map(x, 0, width, 200, 0);
-    background(col1, 0, col2);
-
-    fill(255);
-    circle(x, y, 30);
-    x += xspeed;
-    y += yspeed;
-
-    if (x >= width || x <= 0) {
-        xspeed = xspeed * (-1);
-    }
-
-    if (y >= height || y <= 0) {
-        yspeed = yspeed * (-1);
-    }
+    var xoff = map(noise(inc), 0, 1, 0, width);
+    var yoff = map(noise(500 + inc), 0, 1, 0, height)
+    var roff = map(noise(1000 + inc), 0, 1, 1, 200)
+    fill(xoff, yoff, 0);
+    circle(xoff, yoff, roff);
+    inc += 0.01;
 }
