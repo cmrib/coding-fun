@@ -12,28 +12,33 @@ function setup() {
 function draw() {
     background(0)
 
-
     movers.forEach(mover => {
         mover.show();
         mover.update();
-        //mover.lines()
     });
-
 }
+
+function mouseClicked() {
+    movers.forEach(mover => {
+        mover.slow()
+    });
+}
+
 
 class Mover {
     constructor(x, y) {
         this.pos = createVector(x, y);
         this.vel = createVector(0, 0);
         this.acc = createVector(-0.001, 0.1)
+        this.limiter = 10
     }
 
     update() {
         let mouse = createVector(mouseX, mouseY);
         this.acc = p5.Vector.sub(mouse, this.pos)
-        this.acc.setMag(.7)
+        this.acc.setMag(3)
         this.vel.add(this.acc)
-        this.vel.limit(5)
+        this.vel.limit(this.limiter)
         this.pos.add(this.vel)
     }
 
@@ -45,6 +50,13 @@ class Mover {
     lines() {
         stroke(255, 0, 0)
         line(this.pos.x, this.pos.y, mouseX, mouseY)
+    }
+
+    slow() {
+        if (this.limiter == 10)
+            this.limiter = 1
+        else
+            this.limiter = 10
     }
 
 }
