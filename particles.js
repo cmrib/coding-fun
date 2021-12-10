@@ -11,9 +11,9 @@ function draw() {
     bubbles.push(b);
 
     bubbles.forEach(bubble => {
-        bubble.show()
-        bubble.move()
-        bubble.fade()
+        bubble.show();
+        bubble.move();
+        bubble.fade();
 
     });
     bubbles = bubbles.filter((bubble) => bubble.brightness > 0);
