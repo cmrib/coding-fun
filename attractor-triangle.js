@@ -18,7 +18,6 @@ function draw() {
     for (let mover of movers) {
         mover.update();
         mover.show();
-        mover.rotate()
         attractor.attract(mover);
     }
     if (mouseIsPressed) {
@@ -60,10 +59,6 @@ class Mover {
         this.acc = createVector(0, 0);
         this.mass = m;
         this.r = sqrt(this.mass) * 2;
-
-        this.angle = 0;
-        this.angleV = 0;
-        this.angleA = 0;
     }
 
     applyForce(force) {
@@ -74,11 +69,6 @@ class Mover {
     update() {
         this.vel.add(this.acc);
         this.pos.add(this.vel);
-
-        this.angleA = this.acc.y / 50.0;
-        this.angleV += this.angleA;
-        this.angle += this.angleV;
-
         this.acc.set(0, 0);
     }
 
@@ -86,14 +76,11 @@ class Mover {
         stroke(255);
         strokeWeight(2);
         fill(255, 100);
-        ellipse(this.pos.x, this.pos.y, this.r * 2);
-    }
-
-    rotate() {
         push();
         translate(this.pos.x, this.pos.y);
+        this.angle = this.vel.heading();
         rotate(this.angle);
-        line(0, 0, this.r, 0);
+        triangle(-this.r / 2, -this.r / 2, -this.r / 2, this.r / 2, this.r, 0);
         pop();
     }
 }
